@@ -1,0 +1,16 @@
+name: 'Setup Chromedriver'
+description: 'Installs chromium-chromedriver and chromium-driver from debs'
+inputs:
+  chromium-version:
+    description: 'Version of chromium and chromedriver to install'
+    required: false
+    default: '101.0.4951.64-0ubuntu0.18.04.1'
+runs:
+  using: "composite"
+  steps:
+    - run: apt-get update
+    - run:  curl -LO http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_${{ inputs.chromium-version }}_amd64.deb
+    - run:  curl -LO http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-chromedriver_${{ inputs.chromium-version }}_amd64.deb
+    - run:  curl -LO http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_${{ inputs.chromium-version }}_amd64.deb
+    - run:  apt-get install -y ./chromium-browser_${{ inputs.chromium-version }}_amd64.deb ./chromium-chromedriver_${{ inputs.chromium-version }}_amd64.deb ./chromium-codecs-ffmpeg_${{ inputs.chromium-version }}_amd64.deb
+    - run:  chromedriver --version
