@@ -8,7 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: apt-get update
+    - run: sudo apt-get update
       shell: bash
     - run:  curl -LO http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_${{ inputs.chromium-version }}_amd64.deb
       shell: bash
@@ -16,7 +16,7 @@ runs:
       shell: bash
     - run:  curl -LO http://archive.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_${{ inputs.chromium-version }}_amd64.deb
       shell: bash
-    - run:  apt-get install -y ./chromium-browser_${{ inputs.chromium-version }}_amd64.deb ./chromium-chromedriver_${{ inputs.chromium-version }}_amd64.deb ./chromium-codecs-ffmpeg_${{ inputs.chromium-version }}_amd64.deb
+    - run:  sudo apt-get install -y ./chromium-browser_${{ inputs.chromium-version }}_amd64.deb ./chromium-chromedriver_${{ inputs.chromium-version }}_amd64.deb ./chromium-codecs-ffmpeg_${{ inputs.chromium-version }}_amd64.deb
       shell: bash
     - run:  chromedriver --version
       shell: bash
